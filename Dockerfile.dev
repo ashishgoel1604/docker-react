@@ -1,0 +1,16 @@
+# Specify a Base Image
+FROM node:14-alpine
+
+# Specify work directory, in which all the upcoming instructions will be executed
+WORKDIR /app/react-frontend
+
+# Copy package.json after step 1
+COPY package.json ./
+# Install dependencies based on copied package file, if anything changed
+RUN npm install
+
+# Copy rest of the files
+COPY . .
+
+# Default Command
+CMD ["npm","run","start"]

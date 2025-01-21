@@ -1,0 +1,13 @@
+version: "3"  # Recommended to use version 3
+
+services:
+  my-react-app-ctnr:
+    build:
+    # when we have dockerfile with some other name than the default expected name, then we have to specify it separately
+      context: . 
+      dockerfile: Dockerfile.dev  # Make sure this file exists in your directory
+    ports:
+      - "4000:3000"
+    volumes:
+      - /app/react-frontend/node_modules  # This ensures node_modules persist
+      - .:/app/react-frontend  # This binds the local directory to the container
