@@ -7,7 +7,7 @@ services:
       context: . 
       dockerfile: Dockerfile.dev  # Make sure this file exists in your directory
     ports:
-      - "4000:3000"
+      - "3000:3000"
     volumes:
       - /app/react-frontend/node_modules  # This ensures node_modules persist
       - .:/app/react-frontend  # This binds the local directory to the container

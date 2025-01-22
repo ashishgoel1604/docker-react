@@ -1,0 +1,10 @@
+version: "3"  # Recommended to use version 3
+
+services:
+  my-react-app-ctnr:
+    build:
+    # when we have dockerfile with some other name than the default expected name, then we have to specify it separately
+      context: . 
+      dockerfile: Dockerfile  # Make sure this file exists in your directory
+    ports:
+      - "80:80"

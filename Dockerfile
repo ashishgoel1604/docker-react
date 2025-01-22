@@ -17,5 +17,6 @@ RUN npm run build
 # the above steps will generate a build folder inside /app/react-frontend directory
 # After above phase(builder_phase) completion, we will start a new Phase, that will actually run the above build in container
 FROM nginx
+EXPOSE 80
 COPY --from=builder_phase /app/react-frontend/build /usr/share/nginx/html
 # now as NGINX is running from line 19, it will automatically serve the index.html
