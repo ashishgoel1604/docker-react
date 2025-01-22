@@ -36,3 +36,7 @@ jobs:
           region: us-east-1  # AWS region
           version_label: ${{ github.sha }}  # Use the GitHub commit hash as the version label
           deployment_package: deploy.zip  # The zip file containing the app
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Set the AWS access key ID from GitHub Secrets
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Set the AWS secret access key from GitHub Secrets
+          AWS_DEFAULT_REGION: us-east-1  # Set AWS region if required
