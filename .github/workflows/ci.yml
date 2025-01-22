@@ -30,9 +30,9 @@ jobs:
       - name: Deploy to AWS Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v18
         with:
-          application_name: docker-gh  # Elastic Beanstalk application name
-          environment_name: Dockergh-env  # Elastic Beanstalk environment name
-          existing_bucket_name: elasticbeanstalk-us-east-1-923445559289  # S3 bucket for EB deployment
+          application_name: frontend  # Elastic Beanstalk application name
+          environment_name: Frontend-env  # Elastic Beanstalk environment name
+          existing_bucket_name: elasticbeanstalk-us-east-1-681852020687  # S3 bucket for EB deployment
           region: us-east-1  # AWS region
           version_label: ${{ github.sha }}  # Use the GitHub commit hash as the version label
           deployment_package: deploy.zip  # The zip file containing the app
