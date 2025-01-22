@@ -6,7 +6,7 @@ on:
       - master  # This triggers the action on pushes to the 'master' branch
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,29 +14,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Docker login (to interact with Docker Hub or a private registry)
-      - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-      # Step 3: Build the Docker image using the Dockerfile.dev
+      # Step 2: Build the Docker image using the Dockerfile.dev (without Docker Hub credentials)
       - name: Build Docker image
-        run: docker build -t cygnetops/react-test -f Dockerfile.dev .
+        run: docker build -t my-react-app -f Dockerfile.dev .
 
-      # Step 4: Run tests inside the Docker container
+      # Step 3: Run tests inside the Docker container
       - name: Run tests inside the Docker container
-        run: docker run -e CI=true cygnetops/react-test npm test
+        run: docker run -e CI=true my-react-app npm test
 
-      # Step 5: Generate deployment package (zip the current directory, excluding .git files)
+      # Step 4: Generate deployment package (zip the current directory, excluding .git files)
       - name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
 
-      # Step 6: Deploy to AWS Elastic Beanstalk
+      # Step 5: Deploy to AWS Elastic Beanstalk
       - name: Deploy to AWS Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v18
         with:
-          application_name: frontend  # Elastic Beanstalk application name
-          environment_name: Frontend-env  # Elastic Beanstalk environment name
-          existing_bucket_name: elasticbeanstalk-us-east-1-681852020687  # S3 bucket for EB deployment
+          application_name: docker-gh  # Elastic Beanstalk application name
+          environment_name: Dockergh-env  # Elastic Beanstalk environment name
+          existing_bucket_name: elasticbeanstalk-us-east-1-923445559289  # S3 bucket for EB deployment
           region: us-east-1  # AWS region
           version_label: ${{ github.sha }}  # Use the GitHub commit hash as the version label
           deployment_package: deploy.zip  # The zip file containing the app
-
