@@ -30,7 +30,7 @@ jobs:
       - name: Deploy to AWS Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v18
         with:
-          application_name: frontend  # Elastic Beanstalk application name
+          application_name: frontend  # Elastic Beanstalk application  name
           environment_name: Frontend-env  # Elastic Beanstalk environment name
           existing_bucket_name: elasticbeanstalk-us-east-1-681852020687  # S3 bucket for EB deployment
           region: us-east-1  # AWS region
